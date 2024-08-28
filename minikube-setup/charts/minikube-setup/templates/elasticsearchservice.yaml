@@ -1,0 +1,20 @@
+kind: Service
+apiVersion: v1
+metadata:
+ name: elasticsearch
+spec:
+ clusterIP: None
+ ports:
+ - protocol: TCP
+   port: 9200
+   targetPort: 9200
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+ name: elasticsearch
+subsets:
+ - addresses:
+     - ip: {{ .Values.service.hostip }}
+   ports:
+     - port: 9200

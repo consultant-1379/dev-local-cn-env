@@ -1,0 +1,26 @@
+kind: Service
+apiVersion: v1
+metadata:
+ name: postgresql01
+spec:
+ clusterIP: None
+ ports:
+ - port: 5432
+   targetPort: 5432
+   name: portone
+ - port: 2255
+   targetPort: 22
+   name: porttwo
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+ name: postgresql01
+subsets:
+ - addresses:
+     - ip: {{ .Values.service.hostip }}
+   ports:
+     - port: 5432
+       name: portone
+     - port: 2255
+       name: porttwo

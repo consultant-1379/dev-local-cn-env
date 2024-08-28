@@ -1,0 +1,18 @@
+kind: Service
+apiVersion: v1
+metadata:
+ name: gossiprouter-cache
+spec:
+ ports:
+ - port: 12002
+   targetPort: 49772
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+ name: gossiprouter-cache
+subsets:
+ - addresses:
+     - ip: 192.168.205.237
+   ports:
+     - port: 49772

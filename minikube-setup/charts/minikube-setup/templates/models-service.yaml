@@ -1,0 +1,26 @@
+kind: Service
+apiVersion: v1
+metadata:
+ name: models
+spec:
+ clusterIP: None
+ ports:
+ - port: 34371
+   targetPort: 34371
+   name: portone
+ - port: 36869
+   targetPort: 36869
+   name: porttwo
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+ name: models
+subsets:
+ - addresses:
+     - ip: {{ .Values.service.hostip }}
+   ports:
+     - port: 34371
+       name: portone
+     - port: 36869
+       name: porttwo
